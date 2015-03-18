@@ -41,8 +41,17 @@ master.perm=reshape(master.perm,[master.porder+1,3,2]);
 master.shap=shape2d(master.porder,master.plocal,master.gpts);
 master.sh1d=shape1d(master.porder,master.ploc1d,master.gp1d);
 
-master.mass = 
-master.conv(:,:,1) = 
-master.conv(:,:,2) = 
+W = diag(master.gwgh);
+V(:, :) = master.shap(:, 1, :);
+DX(:, :) = master.shap(:, 2, :);
+DY(:, :) = master.shap(:, 3, :);
 
-master.ma1d = 
+master.mass = V*W*V';
+master.conv(:,:,1) = DX*W*V';
+master.conv(:,:,2) = DY*W*V';
+
+W1D = diag(master.gw1d);
+V1D(:, :) = master.sh1d(:, 1, :);
+
+master.ma1d = V1D*W1D*V1D'; 
+end
