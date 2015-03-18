@@ -1,4 +1,4 @@
-function nfs=shape2d(porder,plocal,pts)
+function nsf=shape2d(porder,plocal,pts)
 %SHAPE2D Calculates the nodal shapefunctions and its derivatives for 
 %        the master triangle [0,0]-[1,0]-[0,1]
 %   NFS=SHAPE2D(PORDER,PLOCAL,PTS)
@@ -15,7 +15,7 @@ function nfs=shape2d(porder,plocal,pts)
 [V, ~] = koornwinder2d(plocal, porder);
 [P, DPX, DPY] = koornwinder2d(pts, porder);
 VT_inv = (V')^(-1);
-NSF(:,1,:) = VT_inv*P';
-NSF(:,2,:) = VT_inv*DPX';
-NSF(:,2,:) = VT_inv*DPY';
+nsf(:,1,:) = VT_inv*P';
+nsf(:,2,:) = VT_inv*DPX';
+nsf(:,3,:) = VT_inv*DPY';
 end
